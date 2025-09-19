@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: andy-peerjs
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PEER_PATH
+        value: /peerjs
+      - key: CORS_ORIGIN
+        value: "*"
