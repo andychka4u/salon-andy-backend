@@ -1,20 +1,18 @@
-# ANDY PeerJS Signaling Server
+# ANDY PeerJS Signaling Server (Ready for Render)
 
-A tiny, production-friendly PeerJS signaling server you can deploy on Render/Heroku/Railway.
+This is a tiny PeerJS signaling server with correct mount/api split, compatible with PeerJS client 1.x.
 
-## Deploy on Render (free plan)
+## Deploy on Render (free)
 
-1. Create a **New Web Service** from this folder (or zip it and connect to a repo).
-2. Build Command: `npm install`
-3. Start Command: `node server.js`
+1. Create a **new GitHub repo**, upload these files.
+2. On Render → **New → Web Service** → connect the repo.
+3. Settings:
+   - Build Command: `npm install`
+   - Start Command: `node server.js`
 4. Environment Variables:
-   - `PEER_PATH`: `/peerjs`
-   - `CORS_ORIGIN`: `*`
-5. After deploy, your signaling URL will be like: `https://YOUR-APP.onrender.com/peerjs`
+   - `PEER_MOUNT` = `/peerjs`
+   - `PEER_API_PATH` = `/`
+   - `CORS_ORIGIN` = `*`
+5. Deploy. Your signaling URL base will be: `https://YOUR-APP.onrender.com/peerjs`
 
-## Deploy on Railway / Fly / Heroku
-- Use the same `npm install` / `node server.js`. The server reads `PORT` from the platform.
-- Keep `PEER_PATH=/peerjs`.
-
-## Test
-Open: `https://YOUR-APP.onrender.com/` → you should see `PeerJS signaling OK`.
+Test health: `https://YOUR-APP.onrender.com/` → should show `PeerJS signaling OK`.
