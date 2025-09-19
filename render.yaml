@@ -6,7 +6,9 @@ services:
     buildCommand: npm install
     startCommand: node server.js
     envVars:
-      - key: PEER_PATH
+      - key: PEER_MOUNT
         value: /peerjs
+      - key: PEER_API_PATH
+        value: /
       - key: CORS_ORIGIN
         value: "*"
