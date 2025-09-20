@@ -1,18 +1,29 @@
-# ANDY Twilio ICE Bridge
+# ANDY Combined Backend (Render)
+Provides:
+- PeerJS server at `/peerjs`
+- Twilio ICE at `/twilio-ice`
+- Health at `/health`
 
-Exposes `/twilio-ice` to return fresh Twilio ICE (TURN/STUN) credentials safely from the server.
-
-## Deploy (Render)
-
-- New **Web Service** (Node 18+)
+## Render setup
+- New Web Service → Upload this folder or connect repo.
 - **Build Command:** `npm install`
 - **Start Command:** `node server.js`
 - **Environment:**
-  - `TWILIO_ACCOUNT_SID` = ACxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  - `TWILIO_API_KEY_SID` = SKxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  - `TWILIO_API_KEY_SECRET` = (secret)
+  - `TWILIO_ACCOUNT_SID`
+  - `TWILIO_API_KEY_SID`
+  - `TWILIO_API_KEY_SECRET`
   - `CORS_ORIGIN` = `*` (or your Netlify domain)
 
-### Test
-- `GET https://<your-app>.onrender.com/health` → `{ "ok": true }`
-- `GET https://<your-app>.onrender.com/twilio-ice` → `{ "iceServers": [ ... ] }`
+## Test
+- `GET https://<your>.onrender.com/health`
+- `GET https://<your>.onrender.com/twilio-ice`
+- `GET https://<your>.onrender.com/peerjs/id`  → should return a random id (signal OK)
+
+Then in frontend PeerJS options:
+```js
+host: '<your>.onrender.com',
+path: '/peerjs',
+port: 443,
+secure: true,
+config: (fetch from /twilio-ice, relay)
+```
