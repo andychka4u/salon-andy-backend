@@ -1,18 +1,18 @@
-# ANDY PeerJS Signaling Server (Ready for Render)
+# ANDY Twilio ICE Bridge
 
-This is a tiny PeerJS signaling server with correct mount/api split, compatible with PeerJS client 1.x.
+Exposes `/twilio-ice` to return fresh Twilio ICE (TURN/STUN) credentials safely from the server.
 
-## Deploy on Render (free)
+## Deploy (Render)
 
-1. Create a **new GitHub repo**, upload these files.
-2. On Render → **New → Web Service** → connect the repo.
-3. Settings:
-   - Build Command: `npm install`
-   - Start Command: `node server.js`
-4. Environment Variables:
-   - `PEER_MOUNT` = `/peerjs`
-   - `PEER_API_PATH` = `/`
-   - `CORS_ORIGIN` = `*`
-5. Deploy. Your signaling URL base will be: `https://YOUR-APP.onrender.com/peerjs`
+- New **Web Service** (Node 18+)
+- **Build Command:** `npm install`
+- **Start Command:** `node server.js`
+- **Environment:**
+  - `TWILIO_ACCOUNT_SID` = ACxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  - `TWILIO_API_KEY_SID` = SKxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  - `TWILIO_API_KEY_SECRET` = (secret)
+  - `CORS_ORIGIN` = `*` (or your Netlify domain)
 
-Test health: `https://YOUR-APP.onrender.com/` → should show `PeerJS signaling OK`.
+### Test
+- `GET https://<your-app>.onrender.com/health` → `{ "ok": true }`
+- `GET https://<your-app>.onrender.com/twilio-ice` → `{ "iceServers": [ ... ] }`
